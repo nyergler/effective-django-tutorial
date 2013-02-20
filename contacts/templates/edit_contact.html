@@ -1,0 +1,11 @@
+<h1>Add Contact</h1>
+
+<form action="{% url contacts-new %}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input type="submit" value="Save" />
+</form>
+
+<a href="{% url contacts-list %}">back to list</a>
