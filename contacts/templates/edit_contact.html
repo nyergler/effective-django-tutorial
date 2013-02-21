@@ -1,6 +1,10 @@
+{% if contact.id %}
+<h1>Edit Contact</h1>
+{% else %}
 <h1>Add Contact</h1>
+{% endif %}
 
-<form action="{% url contacts-new %}" method="POST">
+<form action="{{ action }}" method="POST">
   {% csrf_token %}
   <ul>
     {{ form.as_ul }}
