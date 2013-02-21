@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 
@@ -19,3 +20,7 @@ class Contact(models.Model):
             self.first_name,
             self.last_name,
         ])
+
+    def get_absolute_url(self):
+
+        return reverse('contacts-view', pk=self.id)

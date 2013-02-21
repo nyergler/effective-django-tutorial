@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import (
     CreateView,
     DeleteView,
+    DetailView,
     ListView,
     UpdateView,
 )
@@ -13,6 +14,12 @@ class ListContactView(ListView):
 
     model = Contact
     template_name = 'contact_list.html'
+
+
+class ContactView(DetailView):
+
+    model = Contact
+    template_name = 'contact.html'
 
 
 class CreateContactView(CreateView):
