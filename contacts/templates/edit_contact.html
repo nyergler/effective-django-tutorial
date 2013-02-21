@@ -12,4 +12,8 @@
   <input type="submit" value="Save" />
 </form>
 
+{% if contact.id %}
+<a href="{% url contacts-delete pk=contact.id %}">Delete</a>
+{% endif %}
+
 <a href="{% url contacts-list %}">back to list</a>
