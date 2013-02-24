@@ -1,0 +1,18 @@
+<h1>Edit Addresses</h1>
+
+<p>Editing addresses for {{ contact }}</p>
+
+<form action="{% url contacts-edit-addresses pk=contact.id %}"
+      method="POST">
+    {% csrf_token %}
+    {{ form.management_form }}
+    {% for address_form in form %}
+
+        <ul>
+        {{ address_form.as_ul }}
+        </ul>
+
+    {% endfor %}
+
+    <input type="submit" value="Save" />
+</form>
