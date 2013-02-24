@@ -23,4 +23,4 @@ class Contact(models.Model):
 
     def get_absolute_url(self):
 
-        return reverse('contacts-view', pk=self.id)
+        return reverse('contacts-view', kwargs={'pk': self.id})
