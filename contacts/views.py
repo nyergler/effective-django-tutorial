@@ -8,7 +8,7 @@ from django.views.generic import (
 )
 
 from contacts.models import Contact
-
+import forms
 
 class ListContactView(ListView):
 
