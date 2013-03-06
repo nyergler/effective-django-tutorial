@@ -25,7 +25,7 @@ class ContactView(DetailView):
 class CreateContactView(CreateView):
 
     model = Contact
-    template_name = 'edit_contact.html'
+    template_name = 'edit_contact_custom.html'
     form_class = forms.ContactForm
 
     def get_success_url(self):

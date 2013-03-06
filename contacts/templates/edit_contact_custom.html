@@ -1,0 +1,32 @@
+{% if contact.id %}
+<h1>Edit Contact</h1>
+{% else %}
+<h1>Add Contact</h1>
+{% endif %}
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+
+  {% for field in form %}
+  <div id="{{ field.auto_id }}_container">
+    {{ field.help_text }}
+    <div>
+      {{ field.label_tag }} {{ field }}
+    </div>
+    <div id="{{ field.auto_id }}_errors">
+      {{ field.errors }}
+    </div>
+  </div>
+  {% endfor %}
+
+  <input type="submit" value="Save" />
+</form>
+
+{% if contact.id %}
+<a href="{% url contacts-edit-addresses pk=contact.id %}">
+  Edit Addresses
+</a>
+<a href="{% url contacts-delete pk=contact.id %}">Delete</a>
+{% endif %}
+
+<a href="{% url contacts-list %}">back to list</a>
