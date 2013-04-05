@@ -23,10 +23,10 @@
 </form>
 
 {% if contact.id %}
-<a href="{% url contacts-edit-addresses pk=contact.id %}">
+<a href="{% url "contacts-edit-addresses" pk=contact.id %}">
   Edit Addresses
 </a>
-<a href="{% url contacts-delete pk=contact.id %}">Delete</a>
+<a href="{% url "contacts-delete" pk=contact.id %}">Delete</a>
 {% endif %}
 
-<a href="{% url contacts-list %}">back to list</a>
+<a href="{% url "contacts-list" %}">back to list</a>

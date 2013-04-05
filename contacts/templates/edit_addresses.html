@@ -2,7 +2,7 @@
 
 <p>Editing addresses for {{ contact }}</p>
 
-<form action="{% url contacts-edit-addresses pk=contact.id %}"
+<form action="{% url "contacts-edit-addresses" pk=contact.id %}"
       method="POST">
     {% csrf_token %}
     {{ form.management_form }}
