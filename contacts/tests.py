@@ -85,9 +85,9 @@ class ContactListIntegrationTests(LiveServerTestCase):
 
         # make sure it's listed as <first> <last> on the list
         self.selenium.get('%s%s' % (self.live_server_url, '/'))
-        self.assertEqual(
-            self.selenium.find_elements_by_xpath('//ul/li')[0].text,
-            'foo bar'
+        self.assertTrue(
+            self.selenium.find_elements_by_xpath('//ul/li')[0]
+                .text.startswith('foo bar'),
         )
 
     def test_add_contact_linked(self):
@@ -104,12 +104,14 @@ class ContactListIntegrationTests(LiveServerTestCase):
 
         self.selenium.find_element_by_id('id_first_name').send_keys('test')
         self.selenium.find_element_by_id('id_last_name').send_keys('contact')
-        self.selenium.find_element_by_id('id_email').send_keys('test@example.com')
-
+        self.selenium.find_element_by_id('id_email').send_keys(
+            'test@example.com')
+        self.selenium.find_element_by_id('id_confirm_email').send_keys(
+            'test@example.com')
         self.selenium.find_element_by_xpath("//input[@type='submit']").click()
-        self.assertEqual(
-            self.selenium.find_elements_by_xpath('//ul/li')[-1].text,
-            'test contact'
+        self.assertTrue(
+            self.selenium.find_elements_by_xpath('//ul/li')[0]
+                .text.startswith('test contact'),
         )
 
 
