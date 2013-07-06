@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 import contacts.views
 
@@ -15,3 +16,5 @@ urlpatterns = patterns('',
     url(r'^delete/(?P<pk>\d+)/$', contacts.views.DeleteContactView.as_view(),
         name='contacts-delete',),
 )
+
+urlpatterns += staticfiles_urlpatterns()
