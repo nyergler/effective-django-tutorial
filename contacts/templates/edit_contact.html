@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 {% if contact.id %}
 <h1>Edit Contact</h1>
 {% else %}
@@ -13,3 +17,4 @@
 </form>
 
 <a href="{% url "contacts-list" %}">back to list</a>
+{% endblock %}
