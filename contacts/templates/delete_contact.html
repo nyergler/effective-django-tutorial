@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <h1>Delete Contact</h1>
 
 <p>Are you sure you want to delete the contact {{ contact }}?</p>
@@ -8,3 +12,5 @@
   <input type="submit" value="Yes, delete." />
   <a href="{% url "contacts-list" %}">No, cancel.</a>
 </form>
+
+{% endblock %}
