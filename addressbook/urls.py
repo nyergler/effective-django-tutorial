@@ -5,6 +5,9 @@ import contacts.views
 
 
 urlpatterns = patterns('',
+    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout'),
+
     url(r'^$', contacts.views.ListContactView.as_view(),
         name='contacts-list',),
     url(r'^(?P<pk>\d+)/$', contacts.views.ContactView.as_view(),
