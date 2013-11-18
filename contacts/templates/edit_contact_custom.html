@@ -10,7 +10,13 @@
 
 <form action="{{ action }}" method="POST">
   {% csrf_token %}
-
+  {% if form.non_field_errors %}
+    <ul>
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
   {% for field in form %}
   <div id="{{ field.auto_id }}_container">
     {{ field.help_text }}
