@@ -25,11 +25,38 @@ class ListContactView(LoggedInMixin, ListView):
     model = Contact
     template_name = 'contact_list.html'
 
+    def get_queryset(self):
+
+        return Contact.objects.filter(owner=self.request.user)
+
 
 class ContactView(LoggedInMixin, DetailView):
 
     model = Contact
     template_name = 'contact.html'
+
+
+    def get_object(self, queryset=None):
+        """Returns the object the view is displaying.
+
+        """
+
+        if queryset is None:
+            queryset = self.get_queryset()
+
+        pk = self.kwargs.get(self.pk_url_kwarg, None)
+        queryset = queryset.filter(
+            pk=pk,
+            owner=self.request.user,
+        )
+
+        try:
+            obj = queryset.get()
+        except ObjectDoesNotExist:
+            raise Http404(_(u"No %(verbose_name)s found matching the query") %
+                          {'verbose_name': queryset.model._meta.verbose_name})
+
+        return obj
 
 
 class CreateContactView(LoggedInMixin, CreateView):
