@@ -1,6 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 
+from django.contrib.auth.models import User
+
 
 class Contact(models.Model):
 
@@ -13,6 +15,8 @@ class Contact(models.Model):
     )
 
     email = models.EmailField()
+
+    owner = models.ForeignKey(User)
 
     def __str__(self):
 
