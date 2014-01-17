@@ -17,7 +17,7 @@ class LoggedInMixin(object):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ProtectedView, self).dispatch(*args, **kwargs)
+        return super(LoggedInMixin, self).dispatch(*args, **kwargs)
 
 
 class ListContactView(LoggedInMixin, ListView):
