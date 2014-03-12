@@ -11,7 +11,7 @@ from contacts.models import (
 class ContactForm(forms.ModelForm):
 
     confirm_email = forms.EmailField(
-        "Confirm email",
+        label="Confirm email",
         required=True,
     )
 
