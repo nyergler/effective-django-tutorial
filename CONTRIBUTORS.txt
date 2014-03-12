@@ -4,3 +4,4 @@ address or GitHub username follows their name.
 Nathan Yergler <nyergler>
 Peter <peterarenot>
 Angus <angusb>
+Paulius Zaleckas <pauliuszaleckas>
