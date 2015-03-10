@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.views.generic import (
     CreateView,
@@ -30,11 +31,7 @@ class ListContactView(LoggedInMixin, ListView):
         return Contact.objects.filter(owner=self.request.user)
 
 
-class ContactView(LoggedInMixin, DetailView):
-
-    model = Contact
-    template_name = 'contact.html'
-
+class ContactOwnerMixin(object):
 
     def get_object(self, queryset=None):
         """Returns the object the view is displaying.
@@ -53,10 +50,15 @@ class ContactView(LoggedInMixin, DetailView):
         try:
             obj = queryset.get()
         except ObjectDoesNotExist:
-            raise Http404(_(u"No %(verbose_name)s found matching the query") %
-                          {'verbose_name': queryset.model._meta.verbose_name})
+            raise PermissionDenied
 
         return obj
+
+
+class ContactView(LoggedInMixin, ContactOwnerMixin, DetailView):
+
+    model = Contact
+    template_name = 'contact.html'
 
 
 class CreateContactView(LoggedInMixin, CreateView):
@@ -76,7 +78,7 @@ class CreateContactView(LoggedInMixin, CreateView):
         return context
 
 
-class UpdateContactView(LoggedInMixin, UpdateView):
+class UpdateContactView(LoggedInMixin, ContactOwnerMixin, UpdateView):
 
     model = Contact
     template_name = 'edit_contact.html'
@@ -94,7 +96,7 @@ class UpdateContactView(LoggedInMixin, UpdateView):
         return context
 
 
-class DeleteContactView(LoggedInMixin, DeleteView):
+class DeleteContactView(LoggedInMixin, ContactOwnerMixin, DeleteView):
 
     model = Contact
     template_name = 'delete_contact.html'
@@ -103,7 +105,7 @@ class DeleteContactView(LoggedInMixin, DeleteView):
         return reverse('contacts-list')
 
 
-class EditContactAddressView(LoggedInMixin, UpdateView):
+class EditContactAddressView(LoggedInMixin, ContactOwnerMixin, UpdateView):
 
     model = Contact
     template_name = 'edit_addresses.html'
